@@ -24,7 +24,7 @@ class Movies extends Component {
   };
 
   handlePageChange = (page) => {
-    console.log("HandlePageChange!");
+    console.log("HandlePageChange! ", {page});
   };
 
   render() {
