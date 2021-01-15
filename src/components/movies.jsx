@@ -61,13 +61,13 @@ class Movies extends Component {
     } = this.state;
     if (count === 0) return <p>No movies in the database.</p>;
 
-    const filtered =
-      selectedGenre && selectedGenre._id
-        ? allMovies.filter((movie) => movie.genre._id === selectedGenre._id)
-        : allMovies;
-
-    const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
-    const movies = paginate(sorted, currentPage, pageSize);
+    const { filtered, movies } = this.getData(
+      selectedGenre,
+      allMovies,
+      sortColumn,
+      currentPage,
+      pageSize
+    );
 
     return (
       <div className="row">
@@ -96,6 +96,17 @@ class Movies extends Component {
         </div>
       </div>
     );
+  }
+
+  getData(selectedGenre, allMovies, sortColumn, currentPage, pageSize) {
+    const filtered =
+      selectedGenre && selectedGenre._id
+        ? allMovies.filter((movie) => movie.genre._id === selectedGenre._id)
+        : allMovies;
+
+    const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
+    const movies = paginate(sorted, currentPage, pageSize);
+    return { filtered, movies };
   }
 }
 
