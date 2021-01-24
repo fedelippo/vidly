@@ -14,7 +14,7 @@ class LoginForm extends Component {
       errors.username = "Username is required";
     if (account.password.trim() === "")
       errors.password = "Password is required";
-    return Object.keys(errors).length === 0 ? null : errors;
+    return Object.keys(errors).length === 0 ? {} : errors;
   };
 
   handleSubmit = (e) => {
@@ -44,12 +44,14 @@ class LoginForm extends Component {
             value={this.state.account.username}
             label={"Username"}
             name={"username"}
+            error={this.state.errors.username}
             onChange={this.handleChange}
           />
           <Input
             value={this.state.account.password}
             label={"Password"}
             name={"password"}
+            error={this.state.errors.password}
             onChange={this.handleChange}
           />
           <button className="bt bt-primary">Login</button>
