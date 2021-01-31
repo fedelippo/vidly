@@ -8,7 +8,7 @@ class Form extends Component {
   };
 
   validate = () => {
-    const { error } = Joi.validate(this.state.account, this.schema, {
+    const { error } = Joi.validate(this.state.data, this.schema, {
       abortEarly: false,
     });
     if (!error) return {};
@@ -61,9 +61,9 @@ class Form extends Component {
     if (errorMessage) errors[input.name] = errorMessage;
     else delete errors[input.name]; // clear up existing errors on that property
 
-    const account = { ...this.state.account };
-    account[input.name] = input.value;
-    this.setState({ account, errors });
+    const data = { ...this.state.data };
+    data[input.name] = input.value;
+    this.setState({ data, errors });
   };
 }
 

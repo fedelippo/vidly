@@ -5,7 +5,7 @@ import Input from "./common/input";
 
 class LoginForm extends Form {
   state = {
-    account: { username: "", password: "" },
+    data: { username: "", password: "" },
     errors: {},
   };
 
@@ -20,22 +20,23 @@ class LoginForm extends Form {
   };
 
   render() {
+    const { data, errors } = this.state;
     return (
       <div>
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
           <Input
-            value={this.state.account.username}
+            value={data.username}
             label={"Username"}
             name={"username"}
-            error={this.state.errors.username}
+            error={errors.username}
             onChange={this.handleChange}
           />
           <Input
-            value={this.state.account.password}
+            value={data.password}
             label={"Password"}
             name={"password"}
-            error={this.state.errors.password}
+            error={errors.password}
             onChange={this.handleChange}
           />
           <button className="bt bt-primary">Login</button>
