@@ -20,26 +20,13 @@ class LoginForm extends Form {
   };
 
   render() {
-    const { data, errors } = this.state;
     return (
       <div>
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
-          <Input
-            value={data.username}
-            label={"Username"}
-            name={"username"}
-            error={errors.username}
-            onChange={this.handleChange}
-          />
-          <Input
-            value={data.password}
-            label={"Password"}
-            name={"password"}
-            error={errors.password}
-            onChange={this.handleChange}
-          />
-          <button className="bt bt-primary">Login</button>
+          {this.renderInput("username", "Username")}
+          {this.renderInput("password", "Password")}
+          {this.renderButton("Login")}
         </form>
       </div>
     );
