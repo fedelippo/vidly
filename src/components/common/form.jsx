@@ -71,11 +71,12 @@ class Form extends Component {
     return <button className="bt bt-primary">{label}</button>;
   }
 
-  renderInput(username, label) {
+  renderInput(username, label, type = "text") {
     const { data, errors } = this.state;
 
     return (
       <Input
+        type={type}
         value={data[username]}
         label={label}
         name={username}
