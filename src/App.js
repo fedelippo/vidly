@@ -7,7 +7,7 @@ import Rentals from "./components/common/rentals";
 import NotFound from "./components/common/notFound";
 import NavBar from "./components/common/navBar";
 import React, { Component } from "react";
-import MovieForm from "./components/common/movieForm";
+import MovieForm from "./components/movieForm";
 import LoginForm from "./components/loginForm";
 import "react-toastify/dist/ReactToastify.css";
 import RegisterForm from "./components/registerForm";
