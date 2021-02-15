@@ -2,7 +2,7 @@ import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import { getGenres } from "../services/genreService";
-import { getMovie, saveMovie } from "../services/fakeMovieService";
+import { getMovie, saveMovie } from "../services/movieService";
 
 class MovieForm extends Form {
   state = {
@@ -39,22 +39,25 @@ class MovieForm extends Form {
     const movieId = this.props.match.params.id;
     if (movieId === "new") return;
 
-    const movie = getMovie(movieId);
     // using history.push if the user hit back, they will be redirected to
     // this page with the same movieId which is invalid and they will be
     // redirected to not-found again in an infinite loop.
-    if (!movie) return this.props.history.replace("/not-found");
-
-    this.setState({
-      data: this.mapToViewModel(movie),
-    });
+    try {
+      const { data: movie } = await getMovie(movieId);
+      this.setState({
+        data: this.mapToViewModel(movie),
+      });
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404)
+        return this.props.history.replace("/not-found");
+    }
   }
 
   mapToViewModel(movie) {
     return {
       _id: movie._id || "",
       title: movie.title || "",
-      genreId: movie.genreId || "",
+      genreId: movie.genre._id || "",
       numberInStock: movie.numberInStock || "",
       dailyRentalRate: movie.dailyRentalRate || "",
     };
