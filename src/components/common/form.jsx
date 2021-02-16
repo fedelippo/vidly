@@ -13,7 +13,7 @@ class Form extends Component {
     const { error } = Joi.validate(this.state.data, this.schema, {
       abortEarly: false,
     });
-    if (!error) return {};
+    if (!error) return "";
 
     const errors = {};
 
@@ -49,7 +49,7 @@ class Form extends Component {
     e.preventDefault();
 
     const errors = this.validate();
-    console.log(errors);
+    console.log("Errors: " + errors);
     this.setState({ errors });
     if (errors) return;
 
